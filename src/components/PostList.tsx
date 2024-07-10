@@ -29,12 +29,6 @@ const PostList: React.FC = () => {
             <Button variant="contained" color="primary" component={Link} to={`/view/${post.id}`} className="view">
               View
             </Button>
-            <Button variant="contained" color="secondary" component={Link} to={`/edit/${post.id}`} className="edit">
-              Edit
-            </Button>
-            <Button variant="contained" color="error" onClick={() => dispatch(deletePost(post.id))} className="delete">
-              Delete
-            </Button>
           </ListItem>
         ))}
       </List>
