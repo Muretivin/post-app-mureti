@@ -1,0 +1,43 @@
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    background-color: #fff; 
+  }
+  
+  
+  .button {
+    margin: 10px 5px;
+  }
+  
+  
+  .list {
+    margin-top: 20px;
+  }
+  
+  
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .list-item-text {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  .view{
+    background-color: rgb(56, 56, 83);
+    border-radius: 8px;
+  }
+  .create{
+    color: rgb(118, 118, 165);
+  }
+  

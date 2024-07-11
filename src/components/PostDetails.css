@@ -1,0 +1,39 @@
+/* src/components/PostList.css */
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc; /* Adds a border around the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for a box effect */
+    border-radius: 8px; /* Rounds the corners of the container */
+    background-color: #fff; /* Sets the background color */
+    top: 20%;
+  }
+  
+  /* Button styles */
+  .button {
+    margin: 10px 5px;
+    
+  }
+  
+  /* List styles */
+  .list {
+    margin-top: 20px;
+  }
+  
+  /* ListItem styles */
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .list-item-text {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
