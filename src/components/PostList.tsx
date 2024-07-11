@@ -5,6 +5,7 @@ import { RootState, AppDispatch } from '../store';
 import { fetchPosts, deletePost } from '../features/posts/postSlice';
 import { Button, List, ListItem, ListItemText, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import './PostList.css';
 
 const PostList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -19,7 +20,7 @@ const PostList: React.FC = () => {
 
   return (
     <Container className="container">
-      <Button variant="contained" color="primary" component={Link} to="/create" className="create">
+      <Button variant="contained" color="success" component={Link} to="/create" className="create">
         Create Post
       </Button>
       <List className="list">

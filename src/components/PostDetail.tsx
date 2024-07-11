@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import { RootState, AppDispatch } from '../store';
 import { fetchPosts } from '../features/posts/postSlice';
 import { Container, Button, Typography, Card, CardContent, CardActions } from '@mui/material';
+import './PostDetails.css';
 
 const PostDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,7 +34,7 @@ const PostDetail: React.FC = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" color="primary" component={Link} to="/">
+          <Button variant="contained" color="success" component={Link} to="/">
             Back to Posts
           </Button>
         </CardActions>
