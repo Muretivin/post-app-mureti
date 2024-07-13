@@ -1,4 +1,3 @@
-// src/features/posts/postSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -12,17 +11,25 @@ interface PostState {
   posts: Post[];
   loading: boolean;
   error: string | null;
+  currentPage: number;
+  totalPages: number;
 }
 
 const initialState: PostState = {
   posts: [],
   loading: false,
   error: null,
+  currentPage: 1,
+  totalPages: 1,
 };
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-  return response.data as Post[];
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (page: number) => {
+  const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`);
+  return {
+    data: response.data as Post[],
+    totalPages: Math.ceil(parseInt(response.headers['x-total-count']) / 10),
+    currentPage: page,
+  };
 });
 
 export const createPost = createAsyncThunk('posts/createPost', async (post: Omit<Post, 'id'>) => {
@@ -49,9 +56,11 @@ const postSlice = createSlice({
       .addCase(fetchPosts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
+      .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload;
+        state.posts = action.payload.data;
+        state.totalPages = action.payload.totalPages;
+        state.currentPage = action.payload.currentPage;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
