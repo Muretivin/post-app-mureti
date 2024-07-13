@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../store';
@@ -9,18 +8,28 @@ import './PostList.css';
 
 const PostList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { posts, loading, error } = useSelector((state: RootState) => state.posts);
+  const { posts, loading, error, currentPage, totalPages } = useSelector((state: RootState) => state.posts);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    if (currentPage === 1) {
+      dispatch(fetchPosts(1));
+    }
+  }, [dispatch, currentPage]);
 
-  if (loading) return <p>Loading...</p>;
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+      if (currentPage < totalPages && !loading) {
+        dispatch(fetchPosts(currentPage + 1));
+      }
+    }
+  };
+
+  if (loading && currentPage === 1) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <Container className="container">
-      <Button variant="contained" color="success" component={Link} to="/create" className="create">
+    <Container className="container" onScroll={handleScroll} style={{ height: '400px', overflowY: 'auto' }}>
+      <Button variant="contained" color="primary" component={Link} to="/create" className="create">
         Create Post
       </Button>
       <List className="list">
@@ -39,6 +48,8 @@ const PostList: React.FC = () => {
           </ListItem>
         ))}
       </List>
+      {loading && <p>Loading more...</p>}
+      {currentPage >= totalPages && <p>No more posts</p>}
     </Container>
   );
 };

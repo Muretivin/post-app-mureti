@@ -1,4 +1,3 @@
-// src/components/PostDetail.tsx
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -16,9 +15,9 @@ const PostDetail: React.FC = () => {
 
   useEffect(() => {
     if (!post) {
-      dispatch(fetchPosts());
+      dispatch(fetchPosts(Math.ceil(Number(id) / 10))); // Calculate page number based on post ID assuming 10 posts per page
     }
-  }, [dispatch, post]);
+  }, [dispatch, post, id]);
 
   if (!post) return <p>Loading...</p>;
 
@@ -34,7 +33,7 @@ const PostDetail: React.FC = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" color="success" component={Link} to="/">
+          <Button variant="contained" color="primary" component={Link} to="/">
             Back to Posts
           </Button>
         </CardActions>
